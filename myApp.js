@@ -45,7 +45,7 @@ const createManyPeople = (arrayOfPeople, done) => {
 // Use the function argument `personName` as search key.
 
 const findPeopleByName = (personName, done) => {
-	Person.find(personName, (err, data) => {
+	Person.find({ name: personName }, (err, data) => {
 		if (err) return done(err);
 		done(null, data);
 	});
