@@ -15,15 +15,11 @@ const personSchema = new Schema({
 const Person = mongoose.model("Person", personSchema);
 
 const createAndSavePerson = async personObject => {
-	try {
-		const newPerson = new Person(personObject);
-		await newPerson.save(err => {
-			// This error log is entirely unnecessary because of the try/catch block, but it appears freecodecamp's test won't pass without it.
-			console.log(err);
-		});
-	} catch (error) {
-		console.log(error);
-	}
+	const newPerson = new Person(personObject);
+	await newPerson.save(err => {
+		// This error log is entirely unnecessary because of the try/catch block, but it appears freecodecamp's test won't pass without it.
+		console.log(err);
+	});
 };
 
 createAndSavePerson({
