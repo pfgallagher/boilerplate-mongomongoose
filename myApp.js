@@ -25,6 +25,12 @@ const createAndSavePerson = async personObject => {
 	}
 };
 
+createAndSavePerson({
+	name: "Test",
+	age: 0,
+	favoriteFoods: ["Test", "Test2"],
+});
+
 /** 4) Create many People with `Model.create()` */
 
 // Sometimes you need to create many Instances of your Models,
