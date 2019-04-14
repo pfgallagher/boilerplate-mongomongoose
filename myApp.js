@@ -14,9 +14,10 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-const createAndSavePerson = async personObject => {
+const createAndSavePerson = async (personObject, done) => {
 	try {
 		await Person.create(personObject);
+		done();
 	} catch (error) {
 		console.log(error);
 	}
