@@ -14,7 +14,7 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-const createAndSavePerson = async (_, done) => {
+const createAndSavePerson = async done => {
 	try {
 		await Person.create({
 			name: "Test",
