@@ -14,19 +14,17 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-const createAndSavePerson = async personObject => {
-	const newPerson = new Person(personObject);
-	await newPerson.save(err => {
-		// This error log is entirely unnecessary because of the try/catch block, but it appears freecodecamp's test won't pass without it.
-		console.log(err);
-	});
+const createAndSavePerson = async () => {
+	try {
+		await Person.create({
+			name: "Test",
+			age: 0,
+			favoriteFoods: ["Test", "Test2"],
+		});
+	} catch (error) {
+		console.log(error);
+	}
 };
-
-createAndSavePerson({
-	name: "Test",
-	age: 0,
-	favoriteFoods: ["Test", "Test2"],
-});
 
 /** 4) Create many People with `Model.create()` */
 
