@@ -26,17 +26,11 @@ const createAndSavePerson = done => {
 	});
 };
 
-/** 4) Create many People with `Model.create()` */
-
-// Sometimes you need to create many Instances of your Models,
-// e.g. when seeding a database with initial data. `Model.create()`
-// takes an array of objects like [{name: 'John', ...}, {...}, ...],
-// as the 1st argument, and saves them all in the db.
-// Create many people using `Model.create()`, using the function argument
-// 'arrayOfPeople'.
-
-const createManyPeople = function(arrayOfPeople, done) {
-	done(null /*, data*/);
+const createManyPeople = (arrayOfPeople, done) => {
+	Person.create(arrayOfPeople, (err, data) => {
+		if (err) return done(err);
+		done(null, data);
+	});
 };
 
 /** # C[R]UD part II - READ #
