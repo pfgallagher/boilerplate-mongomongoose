@@ -33,17 +33,6 @@ const createManyPeople = (arrayOfPeople, done) => {
 	});
 };
 
-/** # C[R]UD part II - READ #
-/*  ========================= */
-
-/** 5) Use `Model.find()` */
-
-// Find all the people having a given name, using `Model.find() -> [Person]`
-// In its simplest usage, `Model.find()` accepts a **query** document (a JSON
-// object ) as the first argument, and returns an **array** of matches.
-// It supports an extremely wide range of search options. Check it in the docs.
-// Use the function argument `personName` as search key.
-
 const findPeopleByName = (personName, done) => {
 	Person.find({ name: personName }, (err, data) => {
 		if (err) return done(err);
@@ -51,17 +40,11 @@ const findPeopleByName = (personName, done) => {
 	});
 };
 
-/** 6) Use `Model.findOne()` */
-
-// `Model.findOne()` behaves like `.find()`, but it returns **only one**
-// document, even if there are more. It is especially useful
-// when searching by properties that you have declared as unique.
-// Find just one person which has a certain food in her favorites,
-// using `Model.findOne() -> Person`. Use the function
-// argument `food` as search key
-
-const findOneByFood = function(food, done) {
-	done(null /*, data*/);
+const findOneByFood = (food, done) => {
+	Person.findOne({ food }, (err, data) => {
+		if (err) return done(err);
+		done(null, data);
+	});
 };
 
 /** 7) Use `Model.findById()` */
