@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true });
 
-const Person = new Schema({
+const personSchema = new Schema({
 	name: {
 		type: String,
 		required: true,
@@ -12,43 +12,14 @@ const Person = new Schema({
 	favoriteFoods: [String],
 });
 
-// **Note**: GoMix is a real server, and in real servers interactions with
-// the db are placed in handler functions, to be called when some event happens
-// (e.g. someone hits an endpoint on your API). We'll follow the same approach
-// in these exercises. The `done()` function is a callback that tells us that
-// we can proceed after completing an asynchronous operation such as inserting,
-// searching, updating or deleting. It's following the Node convention and
-// should be called as `done(null, data)` on success, or `done(err)` on error.
-// **Warning** - When interacting with remote services, **errors may occur** !
+const Person = mongoose.model("Person", personSchema);
 
-// - Example -
-// var someFunc = function(done) {
-//   ... do something (risky) ...
-//   if(error) return done(error);
-//   done(null, result);
-// };
-
-/** # [C]RUD part I - CREATE #
-/*  ========================== */
-
-/** 3) Create and Save a Person */
-
-// Create a `document` instance using the `Person` constructor you build before.
-// Pass to the constructor an object having the fields `name`, `age`,
-// and `favoriteFoods`. Their types must be conformant to the ones in
-// the Person `Schema`. Then call the method `document.save()` on the returned
-// document instance, passing to it a callback using the Node convention.
-// This is a common pattern, all the **CRUD** methods take a callback
-// function like this as the last argument.
-
-// - Example -
-// ...
-// person.save(function(err, data) {
-//    ...do your stuff here...
-// });
-
-const createAndSavePerson = function(done) {
-	done(null /*, data*/);
+const createAndSavePerson = async personObject => {
+	try {
+		await Person.create(personObject);
+	} catch (error) {
+		console.log(error);
+	}
 };
 
 /** 4) Create many People with `Model.create()` */
