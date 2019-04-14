@@ -14,13 +14,14 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-const createAndSavePerson = async () => {
+const createAndSavePerson = async (_, done) => {
 	try {
 		await Person.create({
 			name: "Test",
 			age: 0,
 			favoriteFoods: ["Test", "Test2"],
 		});
+		done();
 	} catch (error) {
 		console.log(error);
 	}
