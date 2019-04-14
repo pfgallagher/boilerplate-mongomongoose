@@ -14,18 +14,16 @@ const personSchema = new Schema({
 
 const Person = mongoose.model("Person", personSchema);
 
-const createAndSavePerson = async (fccErr, data) => {
-	try {
-		await Person.create({
-			name: "Test",
-			age: 0,
-			favoriteFoods: ["Test", "Test2"],
-		});
-		data();
-	} catch (error) {
-		console.log(error);
-		console.log(fccErr);
-	}
+const createAndSavePerson = done => {
+	const newPerson = new Person({
+		name: "Test",
+		age: 0,
+		favoriteFoods: ["Test", "Test2"],
+	});
+	newPerson.save((err, data) => {
+		if (err) return done(err);
+		done(null, data);
+	});
 };
 
 /** 4) Create many People with `Model.create()` */
