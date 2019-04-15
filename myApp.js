@@ -79,18 +79,11 @@ const findAndUpdate = (personName, done) => {
 	);
 };
 
-/** # CRU[D] part IV - DELETE #
-/*  =========================== */
-
-/** 10) Delete one Person */
-
-// Delete one person by her `_id`. You should use one of the methods
-// `findByIdAndRemove()` or `findOneAndRemove()`. They are similar to the
-// previous update methods. They pass the removed document to the cb.
-// As usual, use the function argument `personId` as search key.
-
-const removeById = function(personId, done) {
-	done(null /*, data*/);
+const removeById = (personId, done) => {
+	Person.findByIdAndRemove(personId, (err, data) => {
+		if (err) return done(err);
+		done(null, data);
+	});
 };
 
 /** 11) Delete many People */
