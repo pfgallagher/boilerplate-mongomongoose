@@ -94,44 +94,17 @@ const removeManyPeople = done => {
 	});
 };
 
-/** # C[R]UD part V -  More about Queries # 
-/*  ======================================= */
-
-/** 12) Chain Query helpers */
-
-// If you don't pass the `callback` as the last argument to `Model.find()`
-// (or to the other similar search methods introduced before), the query is
-// not executed, and can even be stored in a variable for later use.
-// This kind of object enables you to build up a query using chaining syntax.
-// The actual db search is executed when you finally chain
-// the method `.exec()`, passing your callback to it.
-// There are many query helpers, here we'll use the most 'famous' ones.
-
-// Find people who like "burrito". Sort them alphabetically by name,
-// Limit the results to two documents, and hide their age.
-// Chain `.find()`, `.sort()`, `.limit()`, `.select()`, and then `.exec()`,
-// passing the `done(err, data)` callback to it.
-
-const queryChain = function(done) {
+const queryChain = done => {
 	const foodToSearch = "burrito";
-
-	done(null /*, data*/);
+	Person.find({ favoriteFoods: foodToSearch })
+		.sort({ name: 1 })
+		.limit(2)
+		.select({ age: 0 })
+		.exec((err, data) => {
+			if (err) return done(err);
+			done(null, data);
+		});
 };
-
-/** **Well Done !!**
-/* You completed these challenges, let's go celebrate !
- */
-
-/** # Further Readings... #
-/*  ======================= */
-// If you are eager to learn and want to go deeper, You may look at :
-// * Indexes ( very important for query efficiency ),
-// * Pre/Post hooks,
-// * Validation,
-// * Schema Virtuals and  Model, Static, and Instance methods,
-// * and much more in the [mongoose docs](http://mongoosejs.com/docs/)
-
-//----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
 exports.PersonModel = Person;
 exports.createAndSavePerson = createAndSavePerson;
